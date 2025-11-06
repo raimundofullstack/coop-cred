@@ -5,12 +5,13 @@ export const accountController = {
   async create(req: Request, res: Response) {
     try {
       const userId = (req as any).userId;
-      const { accountType, creditLimit } = req.body;
+      const { accountType, creditLimit, goalDescription } = req.body;
 
       const account = await accountService.createAccount(
         userId,
         accountType,
-        creditLimit
+        creditLimit,
+        goalDescription
       );
       res.status(201).json(account);
     } catch (error: any) {

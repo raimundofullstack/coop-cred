@@ -1,5 +1,5 @@
 import { Types } from "mongoose";
-import { Transaction } from "../models/Transaction.js";
+import { Transaction } from "../models/Transaction";
 
 export const reportService = {
   // Total agrupado por tipo de transação

@@ -1,15 +1,17 @@
-import { Account, IAccount } from "../models/Account.js";
+import { Account, IAccount } from "../models/Account";
 
 export const accountService = {
   async createAccount(
     userId: string,
     accountType: "CORRENTE" | "POUPANCA" = "CORRENTE",
-    creditLimit = 0
+    creditLimit = 0,
+    goalDescription?: string
   ): Promise<IAccount> {
     const account = new Account({
       userId,
       accountType,
       creditLimit,
+      goalDescription,
     });
 
     await account.save();
@@ -21,6 +23,6 @@ export const accountService = {
   },
 
   async getAccountsByUser(userId: string): Promise<IAccount[]> {
-    return Account.find({ userId }).sort({ createdAt: -1 });
+    return Account.find({ userId }).sort({ type: 1 });
   },
 };

@@ -3,6 +3,8 @@
 Sistema de **cooperativa de crédito digital**, desenvolvido com Node.js e TypeScript.  
 Oferece funcionalidades de **contas, transações, relatórios financeiros com agregações MongoDB**, autenticação JWT e documentação automática via Swagger.
 
+Este serviço complementa o [Coop Cred Front](https://github.com/raimundofullstack/coop-cred-front)
+
 ---
 
 ## 🚀 Tecnologias utilizadas
@@ -124,4 +126,4 @@ npm run test
 
 Raimundo Martins | Desenvolvedor Full Stack
 
-💼 Projeto desenvolvido para fins de aprendizado e demonstração de arquitetura back-end moderna com Node.js, TypeScript e MongoDB.
+💼 Projeto desenvolvido para fins de demonstração de arquitetura back-end moderna com Node.js, TypeScript e MongoDB.

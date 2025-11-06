@@ -1,6 +1,6 @@
 import { User, IUser } from "../models/User";
 import jwt from "jsonwebtoken";
-
+import { accountService } from "./accountService";
 interface AuthResponse {
   user: Record<string, any>;
   token: string;
@@ -24,10 +24,14 @@ export const userService = {
     const token = generateToken(user._id.toString());
     const { password: _, ...userWithoutPassword } = user.toObject();
 
+    await accountService.createAccount(user._id.toString(), "CORRENTE", 1000);
+
     return { user: userWithoutPassword, token };
   },
   async login(email: string, password: string): Promise<AuthResponse> {
     const user = await User.findOne({ email });
+    await new Promise((resolve) => setTimeout(resolve, 1000)); // 1 seconds delay para ver componente de loading
+
     if (!user) {
       throw new Error("Usuário não encontrado");
     }

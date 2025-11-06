@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
-import { Account } from "../models/Account.js";
-import { Transaction, ITransaction } from "../models/Transaction.js";
+import { Account } from "../models/Account";
+import { Transaction, ITransaction } from "../models/Transaction";
 
 export const transactionService = {
   async deposit(accountId: string, amount: number): Promise<ITransaction> {

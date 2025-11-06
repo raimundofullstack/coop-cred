@@ -5,6 +5,7 @@ export interface IAccount extends Document {
   balance: number;
   creditLimit: number;
   accountType: "CORRENTE" | "POUPANCA";
+  goalDescription?: string;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -19,6 +20,7 @@ const AccountSchema = new Schema<IAccount>(
       enum: ["CORRENTE", "POUPANCA"],
       default: "CORRENTE",
     },
+    goalDescription: { type: String, required: false },
   },
   { timestamps: true }
 );
