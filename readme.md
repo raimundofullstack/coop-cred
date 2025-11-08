@@ -16,6 +16,8 @@ Este serviço complementa o [Coop Cred Front](https://github.com/raimundofullsta
 ![JWT](https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=jsonwebtokens)
 ![Bcrypt](https://img.shields.io/badge/Bcrypt-003B57?style=for-the-badge&logo=security&logoColor=white)
 ![Swagger](https://img.shields.io/badge/Swagger-85EA2D?style=for-the-badge&logo=swagger&logoColor=black)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black&style=for-the-badge)
+
 
 ---
 
