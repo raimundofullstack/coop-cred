@@ -133,4 +133,4 @@ npm run test
 
 Raimundo Martins | Desenvolvedor Full Stack
 
-💼 Projeto desenvolvido para fins de demonstração de arquitetura back-end moderna com Node.js, TypeScript e MongoDB.
+💼 Projeto desenvolvido para fins de demonstração de arquitetura back-end moderna com Node.js, JavaScript e MongoDB.
