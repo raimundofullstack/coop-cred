@@ -1,6 +1,6 @@
 # 🏦 Coop Cred
 
-Sistema de **cooperativa de crédito digital**, desenvolvido com Node.js e TypeScript.  
+Sistema de **cooperativa de crédito digital**, desenvolvido com Node.js e Javascript.  
 Oferece funcionalidades de **contas, transações, relatórios financeiros com agregações MongoDB**, autenticação JWT e documentação automática via Swagger.
 
 Este serviço complementa o [Coop Cred Front](https://github.com/raimundofullstack/coop-cred-front)
@@ -10,22 +10,21 @@ Este serviço complementa o [Coop Cred Front](https://github.com/raimundofullsta
 ## 🚀 Tecnologias utilizadas
 
 ![Node.js](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)
-![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
 ![Express](https://img.shields.io/badge/Express-000000?style=for-the-badge&logo=express&logoColor=white)
 ![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)
 ![JWT](https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=jsonwebtokens)
 ![Bcrypt](https://img.shields.io/badge/Bcrypt-003B57?style=for-the-badge&logo=security&logoColor=white)
 ![Swagger](https://img.shields.io/badge/Swagger-85EA2D?style=for-the-badge&logo=swagger&logoColor=black)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black&style=for-the-badge)
-
+![Jest](https://img.shields.io/badge/Jest-323330?logo=Jest&logoColor=white&style=for-the-badge)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+![Docker Compose](https://img.shields.io/badge/Docker_Compose-2496ED?logo=docker&logoColor=white&style=for-the-badge)
 
 ---
 
 ## 🧩 Próximas integrações
 
-![Jest](https://img.shields.io/badge/Jest-C21325?style=for-the-badge&logo=jest&logoColor=white)
 ![Supertest](https://img.shields.io/badge/Supertest-333?style=for-the-badge&logo=mocha&logoColor=white)
-![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 ![CI/CD](https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white)
 ![Redis](https://img.shields.io/badge/Redis-DC382D?style=for-the-badge&logo=redis&logoColor=white)
 
@@ -41,8 +40,17 @@ src/
 ├── routes/ # Rotas Express
 ├── services/ # Lógica de negócios
 ├── config/ # Configurações (DB)
+├── tests/ # Testes unitarios e integrados
+├──├─── factories/ # Criar dados de teste para reaproveitamento
+├──├─── helpers/ # Configurações e utilitários
+├──├─── integration/ # Testes integrados
+├──├─── unit/ # Testes unitarios
+├──├───├─── controllers/ # Testes dos controllers
+├──├───├─── services/ # Testes dos services
+├──├─── unit/ # Testes unitarios
 ├── server.ts # Inicialização do servidor
-└── swagger.ts # Geração automática da doc Swagger
+└── Dockerfile # Nosso docker da aplicação
+└── docker-compose.yml # Nosso container contendo a aplicação e o banco mongoDb
 ```
 
 ---
@@ -104,7 +112,6 @@ Será adicionado suporte a:
 
 - Jest (testes unitários e de integração)
 - Supertest (testar rotas REST)
-- MongoMemoryServer (mock de banco de dados)
 
 ```
 npm run test
@@ -115,7 +122,6 @@ npm run test
 - Integração com GitHub Actions
 - Deploy automático em:
   - AWS Elastic Beanstalk (ambiente completo)
-  - Docker Compose (multi-container local)
 
 ## 💡 Próximos módulos
 

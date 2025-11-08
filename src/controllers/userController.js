@@ -4,7 +4,7 @@ const userController = {
   async register(req, res) {
     try {
       const { name, email, password, role } = req.body;
-      const data = await userService.register(name, email, password, role);
+      const data = await userService.register({ name, email, password, role });
       res.status(201).json(data);
     } catch (error) {
       res.status(400).json({ message: error.message });

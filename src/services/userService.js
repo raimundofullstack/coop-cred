@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 import accountService from "./accountService.js";
 
 const userService = {
-  async register(name, email, password, role) {
+  async register({ name, email, password, role }) {
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       throw new Error("Email já cadastrado");
