@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
-import { Account } from "../models/Account";
-import { Transaction, ITransaction } from "../models/Transaction";
+import Account from "../models/Account.js";
+import Transaction from "../models/Transaction.js";
 
-export const transactionService = {
-  async deposit(accountId: string, amount: number): Promise<ITransaction> {
+const transactionService = {
+  async deposit(accountId, amount) {
     if (amount <= 0) throw new Error("Valor inválido");
 
     const account = await Account.findById(accountId);
@@ -22,7 +22,7 @@ export const transactionService = {
     return tx;
   },
 
-  async withdraw(accountId: string, amount: number): Promise<ITransaction> {
+  async withdraw(accountId, amount) {
     if (amount <= 0) throw new Error("Valor inválido");
 
     const account = await Account.findById(accountId);
@@ -44,11 +44,7 @@ export const transactionService = {
     return tx;
   },
 
-  async transfer(
-    fromId: string,
-    toId: string,
-    amount: number
-  ): Promise<ITransaction> {
+  async transfer(fromId, toId, amount) {
     if (fromId === toId)
       throw new Error("Não é possível transferir para a mesma conta");
     if (amount <= 0) throw new Error("Valor inválido");
@@ -80,7 +76,7 @@ export const transactionService = {
     return tx;
   },
 
-  async listByAccount(accountId: string): Promise<ITransaction[]> {
+  async listByAccount(accountId) {
     return Transaction.find({
       $or: [{ fromAccount: accountId }, { toAccount: accountId }],
     })
@@ -89,3 +85,5 @@ export const transactionService = {
       .sort({ createdAt: -1 });
   },
 };
+
+export default transactionService;

@@ -1,12 +1,12 @@
-import { Account, IAccount } from "../models/Account";
+import Account from "../models/Account.js";
 
-export const accountService = {
+const accountService = {
   async createAccount(
-    userId: string,
-    accountType: "CORRENTE" | "POUPANCA" = "CORRENTE",
+    userId,
+    accountType = "CORRENTE",
     creditLimit = 0,
-    goalDescription?: string
-  ): Promise<IAccount> {
+    goalDescription
+  ) {
     const account = new Account({
       userId,
       accountType,
@@ -18,11 +18,13 @@ export const accountService = {
     return account;
   },
 
-  async getAccountById(accountId: string): Promise<IAccount | null> {
+  async getAccountById(accountId) {
     return Account.findById(accountId).populate("userId", "name email role");
   },
 
-  async getAccountsByUser(userId: string): Promise<IAccount[]> {
+  async getAccountsByUser(userId) {
     return Account.find({ userId }).sort({ type: 1 });
   },
 };
+
+export default accountService;

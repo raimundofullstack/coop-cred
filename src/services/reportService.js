@@ -1,9 +1,9 @@
 import { Types } from "mongoose";
-import { Transaction } from "../models/Transaction";
+import Transaction from "../models/Transaction.js";
 
-export const reportService = {
+const reportService = {
   // Total agrupado por tipo de transação
-  async getTotalsByType(accountId: string) {
+  async getTotalsByType(accountId) {
     const accountObjectId = new Types.ObjectId(accountId);
 
     const result = await Transaction.aggregate([
@@ -28,3 +28,5 @@ export const reportService = {
     return result;
   },
 };
+
+export default reportService;

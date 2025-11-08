@@ -1,18 +1,9 @@
-import { User, IUser } from "../models/User";
+import User from "../models/User.js";
 import jwt from "jsonwebtoken";
-import { accountService } from "./accountService";
-interface AuthResponse {
-  user: Record<string, any>;
-  token: string;
-}
+import accountService from "./accountService.js";
 
-export const userService = {
-  async register(
-    name: string,
-    email: string,
-    password: string,
-    role: string
-  ): Promise<AuthResponse> {
+const userService = {
+  async register(name, email, password, role) {
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       throw new Error("Email já cadastrado");
@@ -28,9 +19,10 @@ export const userService = {
 
     return { user: userWithoutPassword, token };
   },
-  async login(email: string, password: string): Promise<AuthResponse> {
+
+  async login(email, password) {
     const user = await User.findOne({ email });
-    await new Promise((resolve) => setTimeout(resolve, 1000)); // 1 seconds delay para ver componente de loading
+    await new Promise((resolve) => setTimeout(resolve, 1000)); // 1 segundo de delay
 
     if (!user) {
       throw new Error("Usuário não encontrado");
@@ -48,12 +40,13 @@ export const userService = {
   },
 };
 
-function generateToken(userId: string): string {
+function generateToken(userId) {
   const secret = process.env.JWT_SECRET;
   if (!secret) {
     throw new Error("JWT secret não configurada (process.env.JWT_SECRET)");
   }
-  const expiresIn = (process.env.JWT_EXPIRES_IN ||
-    "1h") as jwt.SignOptions["expiresIn"];
+  const expiresIn = process.env.JWT_EXPIRES_IN || "1h";
   return jwt.sign({ id: userId }, secret, { expiresIn });
 }
+
+export default userService;
