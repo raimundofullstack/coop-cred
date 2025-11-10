@@ -5,8 +5,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "dev": "dotenv -e .env.development -- nodemon src/server.js",
-    "start": "dotenv -e .env.docker -- node src/server.js",
+    "dev": "cross-env NODE_ENV=development nodemon src/server.js",
+    "start": "node src/server.js",
     "test": "set NODE_OPTIONS=--experimental-vm-modules && jest --runInBand"
   },
   "keywords": [],
@@ -16,6 +16,7 @@
     "bcrypt": "^6.0.0",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
+    "dotenv-flow": "^4.1.0",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.19.2",
@@ -23,6 +24,8 @@
     "swagger-ui-express": "^5.0.1"
   },
   "devDependencies": {
+    "@types/jest": "^30.0.0",
+    "cross-env": "^10.1.0",
     "dotenv-cli": "^11.0.0",
     "jest": "^30.2.0",
     "mongodb-memory-server": "^10.3.0",

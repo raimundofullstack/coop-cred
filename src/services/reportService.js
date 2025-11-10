@@ -3,7 +3,7 @@ import Transaction from "../models/Transaction.js";
 
 const reportService = {
   // Total agrupado por tipo de transação
-  async getTotalsByType(accountId) {
+  async getTotalsByType({ accountId }) {
     const accountObjectId = new Types.ObjectId(accountId);
 
     const result = await Transaction.aggregate([

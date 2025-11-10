@@ -1,12 +1,7 @@
 import Account from "../models/Account.js";
 
 const accountService = {
-  async createAccount(
-    userId,
-    accountType = "CORRENTE",
-    creditLimit = 0,
-    goalDescription
-  ) {
+  async createAccount({ userId, accountType, creditLimit, goalDescription }) {
     const account = new Account({
       userId,
       accountType,
@@ -18,11 +13,11 @@ const accountService = {
     return account;
   },
 
-  async getAccountById(accountId) {
+  async getAccountById({ accountId }) {
     return Account.findById(accountId).populate("userId", "name email role");
   },
 
-  async getAccountsByUser(userId) {
+  async getAccountsByUser({ userId }) {
     return Account.find({ userId }).sort({ type: 1 });
   },
 };

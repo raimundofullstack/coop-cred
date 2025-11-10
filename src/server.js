@@ -1,7 +1,10 @@
+import dotenvFlow from "dotenv-flow";
+dotenvFlow.config();
+
 import app from "./app.js";
 import { connectDb } from "./config/db.js";
 
-const PORT = process.env.port || 3000;
+const PORT = process.env.PORT || 3009;
 
 connectDb().then(() => {
   app.listen(PORT, () => {

@@ -1,6 +1,8 @@
 node_modules
+coverage
 .git
 .gitignore
 Dockerfile*
 .env
+.env.production
 src/tests

@@ -12,7 +12,7 @@ const AccountSchema = new mongoose.Schema(
     accountType: {
       type: String,
       enum: ["CORRENTE", "POUPANCA"],
-      default: "CORRENTE",
+      default: "POUPANCA",
     },
     goalDescription: { type: String, required: false },
   },

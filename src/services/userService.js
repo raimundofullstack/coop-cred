@@ -15,14 +15,17 @@ const userService = {
     const token = generateToken(user._id.toString());
     const { password: _, ...userWithoutPassword } = user.toObject();
 
-    await accountService.createAccount(user._id.toString(), "CORRENTE", 1000);
+    await accountService.createAccount({
+      userId: user._id.toString(),
+      accountType: "CORRENTE",
+      creditLimit: 200,
+    });
 
     return { user: userWithoutPassword, token };
   },
 
-  async login(email, password) {
+  async login({ email, password }) {
     const user = await User.findOne({ email });
-    await new Promise((resolve) => setTimeout(resolve, 1000)); // 1 segundo de delay
 
     if (!user) {
       throw new Error("Usuário não encontrado");

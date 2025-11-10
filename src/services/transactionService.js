@@ -3,7 +3,7 @@ import Account from "../models/Account.js";
 import Transaction from "../models/Transaction.js";
 
 const transactionService = {
-  async deposit(accountId, amount) {
+  async deposit({ accountId, amount }) {
     if (amount <= 0) throw new Error("Valor inválido");
 
     const account = await Account.findById(accountId);
@@ -22,7 +22,7 @@ const transactionService = {
     return tx;
   },
 
-  async withdraw(accountId, amount) {
+  async withdraw({ accountId, amount }) {
     if (amount <= 0) throw new Error("Valor inválido");
 
     const account = await Account.findById(accountId);
@@ -44,7 +44,7 @@ const transactionService = {
     return tx;
   },
 
-  async transfer(fromId, toId, amount) {
+  async transfer({ fromId, toId, amount }) {
     if (fromId === toId)
       throw new Error("Não é possível transferir para a mesma conta");
     if (amount <= 0) throw new Error("Valor inválido");
@@ -76,7 +76,7 @@ const transactionService = {
     return tx;
   },
 
-  async listByAccount(accountId) {
+  async listByAccount({ accountId }) {
     return Transaction.find({
       $or: [{ fromAccount: accountId }, { toAccount: accountId }],
     })
