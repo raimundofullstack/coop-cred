@@ -7,3 +7,4 @@ Dockerfile*
 .env.production
 src/tests
 /logs
+ecs-task-def.json

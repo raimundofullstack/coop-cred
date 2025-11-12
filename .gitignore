@@ -8,3 +8,4 @@
 .env.docker
 
 package-lock.json
+ecs-task-def.json
