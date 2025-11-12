@@ -1,40 +1,46 @@
 import jwt from "jsonwebtoken";
-import { jest } from "@jest/globals";
+import AppError from "../../../errors/AppError.js";
 import authMiddleware from "../../../middlewares/authMiddleware.js";
+import { jest } from "@jest/globals";
 
 describe("authMiddleware", () => {
+  let req, res, next;
+
   beforeEach(() => {
     req = { headers: {} };
-    res = {
-      status: jest.fn().mockReturnThis(),
-      json: jest.fn(),
-    };
+    res = {};
     next = jest.fn();
     jest.clearAllMocks();
   });
 
-  it("deve retornar 401 se o token não for fornecido", () => {
-    authMiddleware(req, res, next);
-
-    expect(res.status).toHaveBeenCalledWith(401);
-    expect(res.json).toHaveBeenCalledWith({ error: "Token ausente" });
+  it("deve lançar AppError se o token não for fornecido", () => {
+    expect(() => authMiddleware(req, res, next)).toThrow(AppError);
+    try {
+      authMiddleware(req, res, next);
+    } catch (error) {
+      expect(error).toBeInstanceOf(AppError);
+      expect(error.errorCode).toBe("TOKEN_MISSING");
+      expect(error.message).toBe("Token ausente");
+      expect(error.statusCode).toBe(401);
+    }
     expect(next).not.toHaveBeenCalled();
   });
 
-  it("deve retornar 401 se o token for inválido", () => {
+  it("deve lançar AppError se o token for inválido", () => {
     req.headers.authorization = "Bearer token_invalido";
     jest.spyOn(jwt, "verify").mockImplementation(() => {
       throw new Error("Token inválido");
     });
 
-    authMiddleware(req, res, next);
-
-    expect(jwt.verify).toHaveBeenCalledWith(
-      "token_invalido",
-      process.env.JWT_SECRET
-    );
-    expect(res.status).toHaveBeenCalledWith(401);
-    expect(res.json).toHaveBeenCalledWith({ error: "Token inválido" });
+    expect(() => authMiddleware(req, res, next)).toThrow(AppError);
+    try {
+      authMiddleware(req, res, next);
+    } catch (error) {
+      expect(error).toBeInstanceOf(AppError);
+      expect(error.errorCode).toBe("INVALID_TOKEN");
+      expect(error.message).toBe("Token inválido");
+      expect(error.statusCode).toBe(401);
+    }
     expect(next).not.toHaveBeenCalled();
   });
 });

@@ -1,4 +1,5 @@
 import Account from "../models/Account.js";
+import AppError from "../errors/AppError.js";
 
 const accountService = {
   async createAccount({ userId, accountType, creditLimit, goalDescription }) {
@@ -14,7 +15,15 @@ const accountService = {
   },
 
   async getAccountById({ accountId }) {
-    return Account.findById(accountId).populate("userId", "name email role");
+    const result = await Account.findById(accountId).populate(
+      "userId",
+      "name email role"
+    );
+
+    if (!result)
+      throw new AppError("ACCOUNT_NOT_FOUND", "Conta não encontrada");
+
+    return result;
   },
 
   async getAccountsByUser({ userId }) {

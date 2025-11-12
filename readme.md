@@ -9,23 +9,43 @@ Este serviço complementa o [Coop Cred Front](https://github.com/raimundofullsta
 
 ## 🚀 Tecnologias utilizadas
 
+### 🧠 Backend
+
 ![Node.js](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)
 ![Express](https://img.shields.io/badge/Express-000000?style=for-the-badge&logo=express&logoColor=white)
 ![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)
 ![JWT](https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=jsonwebtokens)
 ![Bcrypt](https://img.shields.io/badge/Bcrypt-003B57?style=for-the-badge&logo=security&logoColor=white)
+
+### 🧩 Documentação
+
 ![Swagger](https://img.shields.io/badge/Swagger-85EA2D?style=for-the-badge&logo=swagger&logoColor=black)
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black&style=for-the-badge)
+
+### 🧪 Testes
+
 ![Jest](https://img.shields.io/badge/Jest-323330?logo=Jest&logoColor=white&style=for-the-badge)
+![Supertest](https://img.shields.io/badge/Supertest-333?style=for-the-badge&logo=mocha&logoColor=white)
+
+### 🧰 Ambiente & DevOps
+
 ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 ![Docker Compose](https://img.shields.io/badge/Docker_Compose-2496ED?logo=docker&logoColor=white&style=for-the-badge)
+![CI/CD](https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white)
+
+### 📈 Monitoramento e Logs
+
+![Winston](https://img.shields.io/badge/Winston-005571?style=for-the-badge&logo=logstash&logoColor=white)
+![Morgan](https://img.shields.io/badge/Morgan-000000?style=for-the-badge&logo=nodedotjs&logoColor=white)
+![Sentry](https://img.shields.io/badge/Sentry-362D59?style=for-the-badge&logo=sentry&logoColor=white)
+
+### 💬 Linguagem
+
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black&style=for-the-badge)
 
 ---
 
 ## 🧩 Próximas integrações
 
-![Supertest](https://img.shields.io/badge/Supertest-333?style=for-the-badge&logo=mocha&logoColor=white)
-![CI/CD](https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white)
 ![Redis](https://img.shields.io/badge/Redis-DC382D?style=for-the-badge&logo=redis&logoColor=white)
 
 ---
@@ -33,13 +53,16 @@ Este serviço complementa o [Coop Cred Front](https://github.com/raimundofullsta
 ## 📁 Estrutura do projeto
 
 ```
+github/
+├── workflows/ # Arquivo github actions
 src/
+├── config/ # Configurações (DB e Logs)
 ├── controllers/ # Regras de entrada da API
-├── middlewares/ # JWT, validações, etc
+├── erros/ # Definições de erros
+├── middlewares/ # JWT, errorHandler, logsMorgan
 ├── models/ # Schemas Mongoose
 ├── routes/ # Rotas Express
 ├── services/ # Lógica de negócios
-├── config/ # Configurações (DB)
 ├── tests/ # Testes unitarios e integrados
 ├──├─── factories/ # Criar dados de teste para reaproveitamento
 ├──├─── helpers/ # Configurações e utilitários
@@ -48,7 +71,8 @@ src/
 ├──├───├─── controllers/ # Testes dos controllers
 ├──├───├─── services/ # Testes dos services
 ├──├─── unit/ # Testes unitarios
-├── server.ts # Inicialização do servidor
+├── app.js # Definições do servidor
+├── server.js # Inicialização do servidor
 └── Dockerfile # Nosso docker da aplicação
 └── docker-compose.yml # Nosso container contendo a aplicação e o banco mongoDb
 ```
@@ -67,7 +91,7 @@ cd coop-cred
 ### 2️⃣ Instalar dependências
 
 ```bash
-npm install
+yarn install --frozen-lockfile
 ```
 
 ### 3️⃣ Criar arquivo .env
@@ -76,14 +100,16 @@ Crie o arquivo na raiz do projeto com as variáveis:
 
 ```bash
 PORT=3000
-MONGO_URI=mongodb://localhost:27017/coopcred
-JWT_SECRET=sua_chave_super_secreta
+MONGO_URI=mongodb://localhost:27017/nome-do-banco
+JWT_SECRET=sua-chave-secreta
+NODE_ENV=development
+SENTRY_DSN=https://uuid@string.ingest.us.sentry.io/numberProject
 ```
 
 ### 4️⃣ Rodar em modo desenvolvimento
 
 ```bash
-npm run dev
+yarn dev
 ```
 
 Depois, acesse:
@@ -106,20 +132,14 @@ Depois, acesse:
 
 Preparado para dashboards e gráficos no front-end
 
-## 🧪 Testes (planejado)
-
-Será adicionado suporte a:
-
-- Jest (testes unitários e de integração)
-- Supertest (testar rotas REST)
+## 🧪 Testes
 
 ```
-npm run test
+yarn test
 ```
 
 ## 🚀 CI/CD e Deploy (planejado)
 
-- Integração com GitHub Actions
 - Deploy automático em:
   - AWS Elastic Beanstalk (ambiente completo)
 
