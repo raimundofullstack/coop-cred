@@ -29,6 +29,35 @@ jobs:
           docker tag coop-cred:latest ${{ steps.login-ecr.outputs.registry }}/coop-cred:latest
           docker push ${{ steps.login-ecr.outputs.registry }}/coop-cred:latest
 
+      - name: Generate ECS task definition
+        run: |
+          cat > ecs-task-def.json <<EOF
+          {
+            "family": "coop-cred-task",
+            "networkMode": "awsvpc",
+            "requiresCompatibilities": ["FARGATE"],
+            "cpu": "256",
+            "memory": "512",
+            "containerDefinitions": [
+              {
+                "name": "coop-cred",
+                "image": "629143592813.dkr.ecr.us-east-1.amazonaws.com/coop-cred:latest",
+                "essential": true,
+                "portMappings": [
+                  { "containerPort": 3000, "protocol": "tcp" }
+                ],
+                "environment": [
+                  { "name": "PORT", "value": "3000" },
+                  { "name": "NODE_ENV", "value": "production" },
+                  { "name": "JWT_SECRET", "value": "${{ secrets.JWT_SECRET }}" },
+                  { "name": "SENTRY_DSN", "value": "${{ secrets.SENTRY_DSN }}" }
+                ]
+              }
+            ],
+            "executionRoleArn": "arn:aws:iam::629143592813:role/ecsTaskExecutionRole"
+          }
+          EOF
+
       - name: Deploy to ECS
         uses: aws-actions/amazon-ecs-deploy-task-definition@v2
         with:
