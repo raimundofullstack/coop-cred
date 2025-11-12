@@ -3,7 +3,6 @@
 /coverage
 /logs
 
-.env
 .env.development
 .env.production
 .env.docker
