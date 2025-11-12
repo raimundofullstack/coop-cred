@@ -76,8 +76,8 @@ describe("TransactionService - Operações Financeiras", () => {
     await contaOrigem.save();
 
     const tx = await transactionService.transfer({
-      fromId: contaOrigem._id,
-      toId: contaDestino._id,
+      fromAccountId: contaOrigem._id,
+      toAccountId: contaDestino._id,
       amount: 1000,
     });
 
@@ -114,13 +114,13 @@ describe("TransactionService - Operações Financeiras", () => {
 
     // cria 2 transferências
     await transactionService.transfer({
-      fromId: conta1._id,
-      toId: conta2._id,
+      fromAccountId: conta1._id,
+      toAccountId: conta2._id,
       amount: 200,
     });
     await transactionService.transfer({
-      fromId: conta2._id,
-      toId: conta1._id,
+      fromAccountId: conta2._id,
+      toAccountId: conta1._id,
       amount: 150,
     });
 
