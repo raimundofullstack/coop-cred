@@ -3,6 +3,7 @@ name: Deploy AWS ECS
 on:
   push:
     branches: [main]
+  workflow_dispatch:
 
 jobs:
   deploy:
@@ -40,6 +41,23 @@ jobs:
             "memory": "512",
             "containerDefinitions": [
               {
+                "name": "mongo",
+                "image": "mongo:6",
+                "essential": true,
+                "portMappings": [
+                  { "containerPort": 27017, "protocol": "tcp" }
+                ],
+                "environment": [
+                  { "name": "MONGO_INITDB_DATABASE", "value": "coopcred" }
+                ],
+                "mountPoints": [
+                  {
+                    "sourceVolume": "mongo_data",
+                    "containerPath": "/data/db"
+                  }
+                ]
+              },
+              {
                 "name": "coop-cred",
                 "image": "629143592813.dkr.ecr.us-east-1.amazonaws.com/coop-cred:latest",
                 "essential": true,
@@ -51,7 +69,23 @@ jobs:
                   { "name": "NODE_ENV", "value": "production" },
                   { "name": "JWT_SECRET", "value": "${{ secrets.JWT_SECRET }}" },
                   { "name": "SENTRY_DSN", "value": "${{ secrets.SENTRY_DSN }}" }
+                  { "name": "MONGO_URL", "value": "${{ secrets.MONGO_URL }}" }
+                ],
+                "dependsOn": [
+                  {
+                    "containerName": "mongo",
+                    "condition": "START"
+                  }
                 ]
+              }
+            ],
+            "volumes": [
+              {
+                "name": "mongo_data",
+                "efsVolumeConfiguration": {
+                  "fileSystemId": "fs-06403275f2f7d1ff3",
+                  "rootDirectory": "/"
+                }
               }
             ],
             "executionRoleArn": "arn:aws:iam::629143592813:role/ecsTaskExecutionRole"
