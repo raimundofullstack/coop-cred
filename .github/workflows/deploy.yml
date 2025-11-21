@@ -55,7 +55,15 @@ jobs:
                     "sourceVolume": "mongo_data",
                     "containerPath": "/data/db"
                   }
-                ]
+                ],
+                "logConfiguration": {
+                  "logDriver": "awslogs",
+                  "options": {
+                    "awslogs-group": "/ecs/coop-cred",
+                    "awslogs-region": "us-east-1",
+                    "awslogs-stream-prefix": "mongo"
+                  }
+                }
               },
               {
                 "name": "coop-cred",
@@ -76,7 +84,15 @@ jobs:
                     "containerName": "mongo",
                     "condition": "START"
                   }
-                ]
+                ],
+                "logConfiguration": {
+                  "logDriver": "awslogs",
+                  "options": {
+                    "awslogs-group": "/ecs/coop-cred",
+                    "awslogs-region": "us-east-1",
+                    "awslogs-stream-prefix": "ecs"
+                  }
+                }
               }
             ],
             "volumes": [
