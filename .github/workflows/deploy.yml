@@ -42,7 +42,6 @@ jobs:
             "containerDefinitions": [
               {
                 "name": "mongo",
-                "hostname": "mongo",
                 "image": "mongo:6",
                 "essential": true,
                 "portMappings": [
