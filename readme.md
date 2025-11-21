@@ -101,7 +101,7 @@ Crie o arquivo na raiz do projeto com as variáveis:
 
 ```bash
 PORT=3000
-MONGO_URI=mongodb://localhost:27017/nome-do-banco
+MONGO_URL=mongodb://localhost:27017/nome-do-banco
 JWT_SECRET=sua-chave-secreta
 NODE_ENV=development
 SENTRY_DSN=https://uuid@string.ingest.us.sentry.io/numberProject

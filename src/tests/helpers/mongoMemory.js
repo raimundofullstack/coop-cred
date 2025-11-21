@@ -5,9 +5,9 @@ let mongoServer;
 
 export const connectDB = async () => {
   mongoServer = await MongoMemoryServer.create();
-  const MONGO_URI = mongoServer.getUri();
+  const MONGO_URL = mongoServer.getUri();
 
-  await mongoose.connect(MONGO_URI);
+  await mongoose.connect(MONGO_URL);
 };
 
 export const clearDB = async () => {
