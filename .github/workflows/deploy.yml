@@ -86,7 +86,7 @@ jobs:
                 "environment": [
                   { "name": "PORT", "value": "3000" },
                   { "name": "NODE_ENV", "value": "production" },
-                  { "name": "MONGO_URL", "value": "mongodb://mongo:27017/coopcred" },
+                  { "name": "MONGO_URL", "value": "mongodb://localhost:27017/coopcred" },
                   { "name": "JWT_SECRET", "value": "${{ secrets.JWT_SECRET }}" },
                   { "name": "SENTRY_DSN", "value": "${{ secrets.SENTRY_DSN }}" }
                 ],
