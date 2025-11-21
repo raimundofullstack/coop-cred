@@ -68,7 +68,7 @@ jobs:
                   { "name": "PORT", "value": "3000" },
                   { "name": "NODE_ENV", "value": "production" },
                   { "name": "JWT_SECRET", "value": "${{ secrets.JWT_SECRET }}" },
-                  { "name": "SENTRY_DSN", "value": "${{ secrets.SENTRY_DSN }}" }
+                  { "name": "SENTRY_DSN", "value": "${{ secrets.SENTRY_DSN }}" },
                   { "name": "MONGO_URL", "value": "${{ secrets.MONGO_URL }}" }
                 ],
                 "dependsOn": [
