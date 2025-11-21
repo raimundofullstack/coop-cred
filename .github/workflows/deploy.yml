@@ -42,6 +42,7 @@ jobs:
             "containerDefinitions": [
               {
                 "name": "mongo",
+                "hostname": "mongo",
                 "image": "mongo:6",
                 "essential": true,
                 "portMappings": [
@@ -61,9 +62,20 @@ jobs:
                   "options": {
                     "awslogs-group": "/ecs/coop-cred",
                     "awslogs-region": "us-east-1",
-                    "awslogs-stream-prefix": "mongo"
+                    "awslogs-stream-prefix": "mongo",
+                    "awslogs-create-group": "true"
                   }
-                }
+                },
+                "healthCheck": {
+                  "command": [
+                    "CMD-SHELL",
+                    "mongosh --quiet --eval 'db.runCommand({ ping: 1 })' || exit 1"
+                  ],
+                  "interval": 10,
+                  "timeout": 5,
+                  "retries": 5,
+                  "startPeriod": 15
+                },
               },
               {
                 "name": "coop-cred",
@@ -82,7 +94,7 @@ jobs:
                 "dependsOn": [
                   {
                     "containerName": "mongo",
-                    "condition": "START"
+                    "condition": "HEALTHY"
                   }
                 ],
                 "logConfiguration": {
@@ -90,7 +102,8 @@ jobs:
                   "options": {
                     "awslogs-group": "/ecs/coop-cred",
                     "awslogs-region": "us-east-1",
-                    "awslogs-stream-prefix": "ecs"
+                    "awslogs-stream-prefix": "ecs",
+                    "awslogs-create-group": "true"
                   }
                 }
               }
