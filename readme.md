@@ -1,7 +1,7 @@
 # 🏦 Coop Cred
 
 Sistema de **cooperativa de crédito digital**, desenvolvido com Node.js e Javascript.  
-Oferece funcionalidades de **contas, transações, relatórios financeiros com agregações MongoDB**, autenticação JWT e documentação automática via Swagger.
+Oferece funcionalidades de **contas, transações, relatórios financeiros com agregações MongoDB**, autenticação JWT e documentação automática via Swagger, além de deploy automatico para AWS ECS com banco de dados persistente.
 
 Este serviço complementa o [Coop Cred Front](https://github.com/raimundofullstack/coop-cred-front)
 
@@ -55,7 +55,7 @@ Este serviço complementa o [Coop Cred Front](https://github.com/raimundofullsta
 
 ```
 github/
-├── workflows/ # Arquivo github actions
+├── workflows/ # Arquivo github actions para CI/CD
 src/
 ├── config/ # Configurações (DB e Logs)
 ├── controllers/ # Regras de entrada da API
@@ -138,11 +138,6 @@ Preparado para dashboards e gráficos no front-end
 ```
 yarn test
 ```
-
-## 🚀 CI/CD e Deploy (planejado)
-
-- Deploy automático em:
-  - AWS Elastic Beanstalk (ambiente completo)
 
 ## 💡 Próximos módulos
 
